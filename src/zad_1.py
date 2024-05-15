@@ -31,3 +31,28 @@ times = get_times(lam, T)
 # plt.title(f'Poisson Process Simulation (λ = {lam}, λ(t) = cos(t)+1 )\n')
 # plt.ylabel('N_t')
 # plt.xlabel('Time')
+
+
+# check
+def plot_await(times, lam):
+    interarrival_times = np.diff(times)
+    plt.hist(
+        interarrival_times,
+        bins=40,
+        density=True,
+        alpha=0.6,
+        color="g",
+        label="Await times",
+    )
+
+    x = np.linspace(0, np.max(interarrival_times), 100)
+    y = lam * np.exp(-lam * x)
+    plt.plot(x, y, "r-", lw=2, label=f"Poisson (λ={lam})")
+
+    plt.xlabel("Await time")
+    plt.ylabel("Density")
+    plt.legend()
+    plt.show()
+
+
+# plot_await(times, lam)
